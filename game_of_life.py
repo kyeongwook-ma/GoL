@@ -1,9 +1,10 @@
-import Board
 import sys
 from random import randint
 
 from PyQt5.QtTest import QTest
 from PyQt5.QtWidgets import QApplication
+
+import Board
 
 
 def main():
@@ -27,7 +28,7 @@ def main():
         cells_loc = parse_cells_loc(args)
 
     app = QApplication(sys.argv)
-    ui = Board.GoL(num_rows, num_cols)
+    ui = Board.Board(num_rows, num_cols)
 
     for c in cells_loc:
         ui.set_status_on(c[0], c[1])
