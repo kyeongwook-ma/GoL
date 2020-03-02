@@ -3,13 +3,13 @@ import sys
 from random import randint
 
 import numpy as np
-from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtTest import QTest
 from PyQt5.QtWidgets import QApplication
 
 import Board
 
 app = QApplication(sys.argv)
+ui = None
 
 def main():
     args = sys.argv
@@ -31,15 +31,15 @@ def main():
         num_rows, num_cols, cells_loc = parse_args(args)
         n_generation = int(args[2])
 
-    ui = Board.Board(num_rows, num_cols, quit)
+    ui = Board.Board(num_rows, num_cols)
     for c in cells_loc:
         ui.set_status_on(c[0], c[1])
 
     i = 0
     while i < n_generation:
         i += 1
-        QTest.qWait(100)
         ui.update_board()
+        QTest.qWait(100)
 
     if n_generation < math.inf:
         current_status = ui.get_current_status()
@@ -47,10 +47,7 @@ def main():
         result_file.write(np.array_str(current_status))
         result_file.close()
 
-
-def quit():
-    QCoreApplication.instance().quit()
-
+    sys.exit(app.exec_())
 
 def parse_cells_loc(args):
     return args[2:]

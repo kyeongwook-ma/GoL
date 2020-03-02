@@ -1,5 +1,4 @@
 import numpy as np
-from PyQt5 import QtCore
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtWidgets import QWidget, QTableWidget, QVBoxLayout
@@ -9,15 +8,7 @@ OFF_COLOR = QColor(0, 0, 0)
 
 
 class Board(QWidget):
-    def keyPressEvent(self, event):
-
-        if event.key() == QtCore.Qt.Key_Q:
-            self.deleteLater()
-        event.accept()
-
-        self.quit_func()
-
-    def __init__(self, row, col, quit_func):
+    def __init__(self, row, col):
         super().__init__()
         self.title = 'PyQt5 table'
         self.left = 0
@@ -37,9 +28,7 @@ class Board(QWidget):
         self.layout.addWidget(self.tableWidget)
         self.setLayout(self.layout)
 
-        self.showFullScreen()
-
-        self.quit_func = quit_func
+        self.showMaximized()
 
     def createTable(self, row, col):
         self.tableWidget = QTableWidget()
