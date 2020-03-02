@@ -60,7 +60,7 @@ class Board(QWidget):
             neighbour_row = check_row + row
             neighbour_column = check_col + col
 
-            if neighbour_row == row and neighbour_column == col:
+            if neighbour_row == check_row and neighbour_column == check_col:
                 return False
 
             if neighbour_row < 0 or neighbour_row >= self.row:
