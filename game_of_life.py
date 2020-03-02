@@ -1,6 +1,8 @@
+import math
 import sys
 from random import randint
 
+import numpy as np
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtTest import QTest
 from PyQt5.QtWidgets import QApplication
@@ -8,8 +10,6 @@ from PyQt5.QtWidgets import QApplication
 import Board
 
 app = QApplication(sys.argv)
-is_running = True
-
 
 def main():
     args = sys.argv
@@ -17,6 +17,7 @@ def main():
     len_args = len(args)
     num_rows, num_cols = 0, 0
     cells_loc = []
+    n_generation = math.inf
 
     if len_args == 1:
         num_rows = randint(40, 80)
@@ -24,37 +25,58 @@ def main():
         cells_loc = [(randint(40, num_rows) - 1, randint(80, num_cols - 1)) for n in range(2000)]
 
     elif len_args == 2:
-        num_rows, num_cols, nums_cell_init = parse_args(args)
-        cells_loc = parse_cells_loc(args)
+        num_rows, num_cols, cells_loc = parse_args(args)
 
     elif len_args == 3:
-        num_rows, num_cols, nums_cell_init = parse_args(args)
-        cells_loc = parse_cells_loc(args)
-
-    app.aboutToQuit.connect(app.deleteLater)
+        num_rows, num_cols, cells_loc = parse_args(args)
+        n_generation = int(args[2])
 
     ui = Board.Board(num_rows, num_cols, quit)
     for c in cells_loc:
         ui.set_status_on(c[0], c[1])
 
-    while is_running:
+    i = 0
+    while i < n_generation:
+        i += 1
         QTest.qWait(100)
         ui.update_board()
 
+    if n_generation < math.inf:
+        current_status = ui.get_current_status()
+        result_file = open('./result.txt', 'w')
+        result_file.write(np.array_str(current_status))
+        result_file.close()
+
 
 def quit():
-    is_running = False
     QCoreApplication.instance().quit()
 
 
 def parse_cells_loc(args):
     return args[2:]
 
-
 def parse_args(args):
-    num_rows, num_cols = args[0].split(' ')
-    nums_cell_init = args[1]
-    return num_rows, num_cols, nums_cell_init
+    def parse_line(line):
+        return line.replace('\n', '').split(' ')
+
+    file_path = args[1]
+
+    fp = open(file_path, 'rt')
+
+    num_rows, num_cols = 0, 0
+    cell_init_locs = []
+
+    for idx, line in enumerate(fp):
+        if idx == 0:
+            l, r = parse_line(line)
+
+            num_rows, num_cols = int(l), int(r)
+        if idx > 1:
+            l, r = parse_line(line)
+
+            cell_init_locs.append((int(l), int(r)))
+
+    return num_rows, num_cols, cell_init_locs
 
 
 main()

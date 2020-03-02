@@ -84,6 +84,7 @@ class Board(QWidget):
 
         return neighbour_list
 
+
     # https: // en.wikipedia.org / wiki / Conway % 27s_Game_of_Life
     def update_board(self):
 
@@ -141,3 +142,6 @@ class Board(QWidget):
 
     def is_cell_alive(self, row, col):
         return self.grids[row][col] == 1
+
+    def get_current_status(self):
+        return self.grids
