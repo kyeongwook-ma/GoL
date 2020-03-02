@@ -6,13 +6,15 @@
 
 ## How to run through python
 
-1. Run with random state 
+1. install python package with ```install.sh```
+
+2. Run with random state 
 ``` python game_of_life.py```
 
-2. Run with declared state file 
+3. Run with declared state file 
 ```python game_of_life.py plus.txt```
 
-3. Run with declared state file & dump N th generation state 
+4. Run with declared state file & dump N th generation state 
 ```python game_of_life.py plus.txt 10``` 
 - dump N th generation state into ```result.txt``` file
 
