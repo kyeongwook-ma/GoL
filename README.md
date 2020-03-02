@@ -14,7 +14,7 @@
 
 3. Run with declared state file & dump N th generation state 
 ```python game_of_life.py plus.txt 10``` 
-dump N th generation state into ```result.txt``` file
+- dump N th generation state into ```result.txt``` file
 
 
 ## State file schema
