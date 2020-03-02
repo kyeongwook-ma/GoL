@@ -2,7 +2,6 @@ import math
 import sys
 from random import randint
 
-import numpy as np
 from PyQt5.QtTest import QTest
 from PyQt5.QtWidgets import QApplication
 
@@ -44,7 +43,7 @@ def main():
     if n_generation < math.inf:
         current_status = ui.get_current_status()
         result_file = open('./result.txt', 'w')
-        result_file.write(np.array_str(current_status))
+        result_file.write(current_status)
         result_file.close()
 
     sys.exit(app.exec_())

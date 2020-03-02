@@ -133,4 +133,4 @@ class Board(QWidget):
         return self.grids[row][col] == 1
 
     def get_current_status(self):
-        return self.grids
+        return '\n'.join(' '.join('%d' % x for x in y) for y in self.grids)
