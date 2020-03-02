@@ -1,10 +1,14 @@
 import sys
 from random import randint
 
+from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtTest import QTest
 from PyQt5.QtWidgets import QApplication
 
 import Board
+
+app = QApplication(sys.argv)
+is_running = True
 
 
 def main():
@@ -27,17 +31,20 @@ def main():
         num_rows, num_cols, nums_cell_init = parse_args(args)
         cells_loc = parse_cells_loc(args)
 
-    app = QApplication(sys.argv)
-    ui = Board.Board(num_rows, num_cols)
+    app.aboutToQuit.connect(app.deleteLater)
 
+    ui = Board.Board(num_rows, num_cols, quit)
     for c in cells_loc:
         ui.set_status_on(c[0], c[1])
 
-    while True:
+    while is_running:
         QTest.qWait(100)
         ui.update_board()
 
-    sys.exit(app.exec_())
+
+def quit():
+    is_running = False
+    QCoreApplication.instance().quit()
 
 
 def parse_cells_loc(args):
