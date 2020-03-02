@@ -4,10 +4,10 @@
 
 - Python 3.6
 
-## How to run
+## How to run through python
 
 1. Run with random state 
-```python game_of_life.py```
+``` python game_of_life.py```
 
 2. Run with declared state file 
 ```python game_of_life.py plus.txt```
@@ -16,6 +16,19 @@
 ```python game_of_life.py plus.txt 10``` 
 - dump N th generation state into ```result.txt``` file
 
+## How to run through exec file
+
+Download & Unzip this[https://drive.google.com/file/d/1Zqjo77ZCLVs9-1J-gwann6NO-1XSP5fS/view?usp=sharing]
+
+1. Run with random state 
+``` ./game_of_life```
+
+2. Run with declared state file 
+```./game_of_life plus.txt```
+
+3. Run with declared state file & dump N th generation state 
+```./game_of_life.py plus.txt 10``` 
+- dump N th generation state into ```result.txt``` file
 
 ## State file schema
 
