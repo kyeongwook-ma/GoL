@@ -1,5 +1,7 @@
 # Game of Life  
 
+should be deleted
+
 Game of Life implemented on PyQT5.
 It can run in 3 ways (1.random state, 2. state initialized described in file, 3. process N th generation then dump last state)
 > random state will be initialized below conditions. (row : 40 ~ 80, col : 80 ~ 120)
